@@ -1,0 +1,284 @@
+chaincode:
+  builder: $(DOCKER_NS)/fabric-ccenv:$(TWO_DIGIT_VERSION)
+  executetimeout: 1m0s
+  externalBuilders:
+  - environmentWhiteList:
+    - IBP_BUILDER_ENDPOINT
+    - IBP_BUILDER_SHARED_DIR
+    name: ibp-builder
+    path: /usr/local
+    propagateEnvironment:
+    - IBP_BUILDER_ENDPOINT
+    - IBP_BUILDER_SHARED_DIR
+    - PEER_NAME
+  golang:
+    dynamicLink: false
+    runtime: $(DOCKER_NS)/fabric-baseos:$(TWO_DIGIT_VERSION)
+  id: {}
+  installTimeout: 5m0s
+  java:
+    runtime: $(DOCKER_NS)/fabric-javaenv:$(TWO_DIGIT_VERSION)
+  keepalive: 0s
+  logging:
+    format: '%{color}%{time:2006-01-02 15:04:05.000 MST} [%{module}] %{shortfunc}
+      -> %{level:.4s} %{id:03x}%{color:reset} %{message}'
+    level: info
+    shim: warning
+  mode: net
+  node:
+    runtime: $(DOCKER_NS)/fabric-nodeenv:$(TWO_DIGIT_VERSION)
+  pull: false
+  startuptimeout: 5m0s
+  system:
+    _lifecycle: enable
+    cscc: enable
+    lscc: enable
+    qscc: enable
+ledger:
+  history:
+    enableHistoryDatabase: true
+  pvtdataStore:
+    collElgProcDbBatchesInterval: 1000
+    collElgProcMaxDbBatchSize: 5000
+    deprioritizedDataReconcilerInterval: 1h0m0s
+  state:
+    couchDBConfig:
+      cacheSize: 64
+      couchDBAddress: 127.0.0.1:5984
+      createGlobalChangesDB: false
+      internalQueryLimit: 1000
+      maxBatchUpdateSize: 1000
+      maxRetries: 3
+      maxRetriesOnStartup: 10
+      requestTimeout: 35s
+      warmIndexesAfterNBlocks: 1
+    stateDatabase: goleveldb
+    totalQueryLimit: 100000
+metrics:
+  provider: prometheus
+  statsd:
+    address: 127.0.0.1:8125
+    network: udp
+    writeInterval: 10s
+operations:
+  listenAddress: 127.0.0.1:9443
+  tls:
+    cert: {}
+    clientAuthRequired: false
+    clientRootCas: {}
+    enabled: false
+    key: {}
+peer:
+  BCCSP:
+    SW:
+      filekeystore: {}
+      hash: SHA2
+      security: 256
+    default: SW
+  address: 0.0.0.0:7051
+  addressAutoDetect: false
+  adminService: {}
+  authentication:
+    timewindow: 15m0s
+  client:
+    connTimeout: 3s
+  deliveryclient:
+    connTimeout: 3s
+    reConnectBackoffThreshold: 1h0m0s
+    reconnectTotalTimeThreshold: 1h0m0s
+  discovery:
+    authCacheEnabled: true
+    authCacheMaxSize: 1000
+    authCachePurgeRetentionRatio: 0.75
+    enabled: true
+    orgMembersAllowedAccess: false
+  fileSystemPath: /var/hyperledger/production
+  gossip:
+    aliveExpirationTimeout: 25s
+    aliveTimeInterval: 5s
+    bootstrap:
+    - 127.0.0.1:7051
+    connTimeout: 2s
+    dialTimeout: 3s
+    digestWaitTime: 1s
+    election:
+      leaderAliveThreshold: 10s
+      leaderElectionDuration: 5s
+      membershipSampleInterval: 1s
+      startupGracePeriod: 15s
+    maxBlockCountToStore: 10
+    maxConnectionAttempts: 120
+    maxPropagationBurstLatency: 10ms
+    maxPropagationBurstSize: 10
+    membershipTrackerInterval: 5s
+    msgExpirationFactor: 20
+    orgLeader: true
+    propagateIterations: 1
+    propagatePeerNum: 3
+    publishCertPeriod: 10s
+    publishStateInfoInterval: 4s
+    pullInterval: 4s
+    pullPeerNum: 3
+    pvtData:
+      btlPullMargin: 10
+      implicitCollectionDisseminationPolicy:
+        maxPeerCount: 1
+      pullRetryThreshold: 5s
+      pushAckTimeout: 3s
+      reconcileBatchSize: 10
+      reconcileSleepInterval: 1m0s
+      reconciliationEnabled: true
+      skipPullingInvalidTransactionsDuringCommit: false
+      transientstoreMaxBlockRetention: 1000
+    reconnectInterval: 25s
+    recvBuffSize: 20
+    requestStateInfoInterval: 4s
+    requestWaitTime: 1.5s
+    responseWaitTime: 2s
+    sendBuffSize: 200
+    skipBlockVerification: false
+    state:
+      batchSize: 10
+      blockBufferSize: 20
+      checkInterval: 10s
+      enabled: false
+      maxRetries: 3
+      responseTimeout: 3s
+    stateInfoRetentionInterval: 0s
+    useLeaderElection: false
+  handlers:
+    authFilters:
+    - library: ""
+      name: DefaultAuth
+    - library: ""
+      name: ExpirationCheck
+    decorators:
+    - library: ""
+      name: DefaultDecorator
+    endorsers:
+      escc:
+        library: ""
+        name: DefaultEndorsement
+    validators:
+      vscc:
+        library: ""
+        name: DefaultValidation
+  id: jdoe
+  keepalive:
+    client:
+      interval: 1m0s
+      timeout: 20s
+    deliveryClient:
+      interval: 1m0s
+      timeout: 20s
+    interval: 2h0m0s
+    minInterval: 1m0s
+    timeout: 20s
+  limits:
+    concurrency:
+      deliverService: 2500
+      endorserService: 2500
+  listenAddress: 0.0.0.0:7051
+  localMspId: SampleOrg
+  localMspType: bccsp
+  mspConfigPath: msp
+  networkId: dev
+  profile:
+    enabled: false
+    listenAddress: 0.0.0.0:6060
+  tls:
+    cert:
+      file: tls/server.crt
+    clientAuthRequired: false
+    clientCert: {}
+    clientKey: {}
+    clientRootCas:
+      files:
+      - tls/ca.crt
+    enabled: false
+    key:
+      file: tls/server.key
+    rootCert:
+      file: tls/ca.crt
+vm:
+  docker:
+    attachStdout: false
+    hostConfig:
+      AutoRemove: false
+      Binds: null
+      BlkioDeviceReadBps: null
+      BlkioDeviceReadIOps: null
+      BlkioDeviceWriteBps: null
+      BlkioDeviceWriteIOps: null
+      BlkioWeight: 0
+      BlkioWeightDevice: null
+      CapAdd: null
+      CapDrop: null
+      Cgroup: ""
+      CgroupParent: ""
+      CgroupnsMode: ""
+      ConsoleSize:
+      - 0
+      - 0
+      ContainerIDFile: ""
+      CpuCount: 0
+      CpuPercent: 0
+      CpuPeriod: 0
+      CpuQuota: 0
+      CpuRealtimePeriod: 0
+      CpuRealtimeRuntime: 0
+      CpuShares: 0
+      CpusetCpus: ""
+      CpusetMems: ""
+      DeviceCgroupRules: null
+      DeviceRequests: null
+      Devices: null
+      Dns: null
+      DnsOptions: null
+      DnsSearch: null
+      ExtraHosts: null
+      GroupAdd: null
+      IOMaximumBandwidth: 0
+      IOMaximumIOps: 0
+      IpcMode: ""
+      Isolation: ""
+      KernelMemory: 0
+      KernelMemoryTCP: 0
+      Links: null
+      LogConfig:
+        Config: null
+        Type: ""
+      MaskedPaths: null
+      Memory: 2147483648
+      MemoryReservation: 0
+      MemorySwap: 0
+      MemorySwappiness: null
+      NanoCpus: 0
+      NetworkMode: host
+      OomKillDisable: null
+      OomScoreAdj: 0
+      PidMode: ""
+      PidsLimit: null
+      PortBindings: null
+      Privileged: false
+      PublishAllPorts: false
+      ReadonlyPaths: null
+      ReadonlyRootfs: false
+      RestartPolicy:
+        MaximumRetryCount: 0
+        Name: ""
+      SecurityOpt: null
+      ShmSize: 0
+      UTSMode: ""
+      Ulimits: null
+      UsernsMode: ""
+      VolumeDriver: ""
+      VolumesFrom: null
+    tls:
+      ca:
+        file: docker/ca.crt
+      cert:
+        file: docker/tls.crt
+      enabled: false
+      key:
+        file: docker/tls.key

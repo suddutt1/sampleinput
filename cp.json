@@ -1,0 +1,41 @@
+{
+    "name": "rbcmspprofile",
+    "description": "Network on IBP v2",
+    "version": "1.0.0",
+    "client": {
+        "organization": "rbcmsp"
+    },
+    "organizations": {
+        "rbcmsp": {
+            "mspid": "rbcmsp",
+            "certificateAuthorities": [
+                "asset-hlf-network-rbcca-ca.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443"
+            ],
+            "peers": [
+                "asset-hlf-network-rbcpeer0-peer.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443"
+            ]
+        }
+    },
+    "peers": {
+        "asset-hlf-network-rbcpeer0-peer.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443": {
+            "url": "grpcs://asset-hlf-network-rbcpeer0-peer.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICCTCCAbCgAwIBAgIUGuqo+raZPHpJ+kjDXbr+CSznyXswCgYIKoZIzj0EAwIw\nYzELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRQwEgYDVQQDEwtyYmNjYS10\nbHNjYTAeFw0yMjA3MjcxMDM0MDBaFw0zNzA3MjMxMDM0MDBaMGMxCzAJBgNVBAYT\nAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlwZXJsZWRn\nZXIxDzANBgNVBAsTBkZhYnJpYzEUMBIGA1UEAxMLcmJjY2EtdGxzY2EwWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAAQns9K6Urh7qXrbOnXiUSeXgnM9WSZNMWwdNV7J\neRZGwvpXHSRUAa94NHX04+9TjpfDXU3I8fHd21si5p5KGjaro0IwQDAOBgNVHQ8B\nAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU7Mih8puuoNy/Hz0t\nBL0Fh/QzRxgwCgYIKoZIzj0EAwIDRwAwRAIgcxDuRdteKp2T9gt7vRS9fFmbhng6\nQlx1Dv029QzFVDECIAn7XPorZNcmBtTZGP/jQfznawRCiRHDlBfqDknvEMe7\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "asset-hlf-network-rbcpeer0-peer.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "asset-hlf-network-rbcca-ca.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443": {
+            "url": "https://asset-hlf-network-rbcca-ca.vpc-iks-dev-samara-f070b9e3d9bac4d221e459c7197f78e4-0000.ca-tor.containers.appdomain.cloud:443",
+            "caName": "ca",
+            "tlsCACerts": {
+                "pem": [
+                    "-----BEGIN CERTIFICATE-----\nMIIDvzCCA2agAwIBAgIRANZVM/7Sa8aewqc1BynpSv0wCgYIKoZIzj0EAwIwgdox\nCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEPMA0GA1UEBxMG\nRHVyaGFtMQwwCgYDVQQKEwNJQk0xEzARBgNVBAsTCkJsb2NrY2hhaW4xfjB8BgNV\nBAMTdWFzc2V0LWhsZi1uZXR3b3JrLXJiY2NhLWNhLnZwYy1pa3MtZGV2LXNhbWFy\nYS1mMDcwYjllM2Q5YmFjNGQyMjFlNDU5YzcxOTdmNzhlNC0wMDAwLmNhLXRvci5j\nb250YWluZXJzLmFwcGRvbWFpbi5jbG91ZDAeFw0yMjA3MjcxMDM5MjdaFw0zMjA3\nMjQxMDM5MjdaMIHaMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExDzANBgNVBAcTBkR1cmhhbTEMMAoGA1UEChMDSUJNMRMwEQYDVQQLEwpCbG9j\na2NoYWluMX4wfAYDVQQDE3Vhc3NldC1obGYtbmV0d29yay1yYmNjYS1jYS52cGMt\naWtzLWRldi1zYW1hcmEtZjA3MGI5ZTNkOWJhYzRkMjIxZTQ1OWM3MTk3Zjc4ZTQt\nMDAwMC5jYS10b3IuY29udGFpbmVycy5hcHBkb21haW4uY2xvdWQwWTATBgcqhkjO\nPQIBBggqhkjOPQMBBwNCAAQOSez2kB5riGbcQXE3P6KjE/F+y0FZcIXIa3bLvHAU\nol0ht9nrizNEFYUrth7FVMnOFB5cVW2ytszIfEODRcRCo4IBCTCCAQUwggEBBgNV\nHREEgfkwgfaCdWFzc2V0LWhsZi1uZXR3b3JrLXJiY2NhLWNhLnZwYy1pa3MtZGV2\nLXNhbWFyYS1mMDcwYjllM2Q5YmFjNGQyMjFlNDU5YzcxOTdmNzhlNC0wMDAwLmNh\nLXRvci5jb250YWluZXJzLmFwcGRvbWFpbi5jbG91ZIJ9YXNzZXQtaGxmLW5ldHdv\ncmstcmJjY2Etb3BlcmF0aW9ucy52cGMtaWtzLWRldi1zYW1hcmEtZjA3MGI5ZTNk\nOWJhYzRkMjIxZTQ1OWM3MTk3Zjc4ZTQtMDAwMC5jYS10b3IuY29udGFpbmVycy5h\ncHBkb21haW4uY2xvdWQwCgYIKoZIzj0EAwIDRwAwRAIgb/3XtCU4dsEDIaC1IESB\nKeCB38ZVriqQ9l8O0ov2DIUCIEr1N8VAaG+6YA7fXFFOEDQefR7PvhggNo1LfjKt\n+t0y\n-----END CERTIFICATE-----\n"
+                ]
+            }
+        }
+    }
+}
